@@ -27,16 +27,41 @@ const App = () => {
     }
 
     const todoToogleCompleted = (todoId) => {
-        const changedTodos = todos.map(todo => {
-            const todoEdit = {
-                ...todo,
-                completed: !todo.completed
-            }
-            if (todo.id == todoId) {
-                return todoEdit
-            }
-            else { return todo }
-        })
+        //     const changedTodos = todos.map(todo => {
+        //         const todoEdit = {
+        //             ...todo,
+        //             completed: !todo.completed
+        //         }
+        //         if (todo.id == todoId) {
+        //             return todoEdit
+        //         }
+        //         else { return todo }
+        //     })
+        //     setTodos(changedTodos);
+        // }
+
+        // const changedTodos = todos.map(todo => (
+        //     todo.id === todoId
+        //     ?
+        //     {...todo, completed: !todo.completed}
+        //     :todo
+        // ));
+
+        const changedTodos = todos.map(todo => todo.id === todoId ? { ...todo, completed: !todo.completed } : todo);
+        setTodos(changedTodos)
+    }
+
+    const todoAdd = (todo) => {
+        const newTodo = {
+            id: Date.now(),
+            ...todo,
+            completed: false
+        }
+
+        const changedTodos = [
+            newTodo,
+            ...todos
+        ]
         setTodos(changedTodos);
     }
 
@@ -51,7 +76,9 @@ const App = () => {
                     />
                 </div>
                 <div className='col-4'>
-                    <TodoForm />
+                    <TodoForm
+                        todoAdd={todoAdd}
+                    />
                 </div>
             </div>
         </div>

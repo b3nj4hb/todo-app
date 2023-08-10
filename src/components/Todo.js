@@ -11,8 +11,8 @@ const Todo = ({ todo, todoDelete, todoToogleCompleted }) => {
                     {todo.title}
                     <button
                         onClick={() => todoToogleCompleted(todo.id)}
-                        className='btn btm-sm btn-outline-success ms-2'>
-                        Terminar
+                        className={`btn btm-sm ${todo.completed ? 'btn-outline-success' : 'btn-success'} ms-2`}>
+                        {todo.completed ? 'Terminado':'Terminar'}
                     </button>
                 </h3>
                 <p className='card-body text-end'>
